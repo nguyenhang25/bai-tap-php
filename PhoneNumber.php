@@ -10,14 +10,15 @@
 
 		if (isset($_POST['submit'])) {
 			$textInput = $_POST['inputText'];
-			$textInput = str_replace(',', ' ', $textInput);
-			$textInput = trim($textInput);
-			$array = explode(' ', $textInput);
-			for($i=0; $i < count($array); $i++){
-			  if($array[$i] == null) 
-			      array_splice($array, $i, 1);
+			$strlen = strlen($textInput);
+			$array = array();
+			for($i = 0; $i < $strlen; $i++)
+			{
+			  if(preg_match('/^[0-9]+$/', $textInput[$i])){
+			      array_push($array, $textInput[$i]);
+			  }
 			}
-			
+
 			$phoneNumber = createPhoneNumber($array);
 
 		}
